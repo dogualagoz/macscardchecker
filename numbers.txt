@@ -1,0 +1,5 @@
+# Alınmış kart numaraları
+# Her satıra bir numara yazın (042 ya da 42 olarak yazabilirsiniz).
+# "#" işaretinden sonrası not sayılır ve dikkate alınmaz.
+# Bu dosya herkese açıktır, isim gibi kişisel bilgi yazmayın.
+

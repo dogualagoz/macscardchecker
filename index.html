@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MACS Kart Numarası</title>
+  <meta name="description" content="MACS kulüp kartı numaralarının dolu mu boş mu olduğunu kontrol edin.">
+  <link rel="icon" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="brand">
+      <img src="logo.png" alt="MACS logosu" width="64" height="64">
+      <div>
+        <h1>Kart Numarası Kontrol</h1>
+        <p class="sub">Kulüp kartı numarası dolu mu, boş mu?</p>
+      </div>
+    </header>
+
+    <form id="check-form" class="check" autocomplete="off">
+      <label for="number" class="visually-hidden">Kart numarası</label>
+      <input id="number" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" placeholder="000" autofocus>
+      <button type="submit" class="btn btn-primary">Kontrol et</button>
+    </form>
+
+    <section id="result" class="result idle" role="status" aria-live="polite">
+      <span class="result-number"></span>
+      <span class="result-text">3 haneli numarayı yazın</span>
+      <button id="result-action" type="button" class="btn result-action" hidden></button>
+    </section>
+
+    <p id="stats" class="stats">Liste yükleniyor…</p>
+
+    <button id="next-free" type="button" class="btn" disabled>Sıradaki boş numarayı göster</button>
+
+    <details id="all" class="all">
+      <summary>Tüm numaraları göster</summary>
+      <div class="legend">
+        <span><i class="swatch taken"></i>Alınmış</span>
+        <span><i class="swatch"></i>Boş</span>
+      </div>
+      <div id="grid" class="grid"></div>
+    </details>
+
+    <section id="admin" class="admin" hidden>
+      <div id="admin-login">
+        <h2>Yönetici girişi</h2>
+        <p id="repo-missing" class="hint" hidden>
+          Repo bulunamadı. <code>app.js</code> içindeki <code>GITHUB_REPO</code> değerini doldurun.
+        </p>
+        <form id="login-form" class="stack">
+          <p class="hint">
+            Numara eklemek için bu repoya yazma izni olan bir GitHub token’ı gerekir.
+            Token yalnızca bu cihazda saklanır.
+            <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Token oluştur</a>
+          </p>
+          <label for="token" class="visually-hidden">GitHub token</label>
+          <input id="token" class="field" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…" required>
+          <button type="submit" class="btn btn-primary">Giriş yap</button>
+        </form>
+      </div>
+
+      <div id="admin-panel" class="stack" hidden>
+        <div class="admin-head">
+          <div>
+            <h2>Yönetici modu</h2>
+            <p id="admin-repo" class="hint"></p>
+          </div>
+          <button id="logout" type="button" class="link">Çıkış yap</button>
+        </div>
+        <p class="hint">
+          Bir numarayı kontrol edince sonucun altında ekleme/çıkarma butonu çıkar.
+          Değişiklik sizin ekranınızda hemen, diğer herkeste 1–2 dakika içinde görünür.
+        </p>
+        <form id="bulk-form" class="stack">
+          <label for="bulk"><strong>Toplu ekle</strong></label>
+          <textarea id="bulk" class="field" rows="3" placeholder="012, 013, 101"></textarea>
+          <button type="submit" class="btn btn-primary">Numaraları ekle</button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <button id="admin-toggle" type="button" class="link">Yönetici girişi</button>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
